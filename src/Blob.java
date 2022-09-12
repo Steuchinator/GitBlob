@@ -6,8 +6,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
@@ -15,17 +17,20 @@ import java.util.*;
 public class Blob {
 	String translatedName;
 	String fileWord;
-	String givenName;
+//	String givenName;
+	String path;
+	String contents;
 	public Blob(String input) throws IOException {
-		givenName = input;
-		fileWord = getFileString(input);
-		translatedName = fileNameCreator(fileWord);
+//		givenName = input;
+//		fileWord = getFileString(input);
+		translatedName = fileNameCreator(getContents(input));
 		makeNewFile();
 	}
-	private static String getFileString(String input) throws IOException {
-		Path filePath = Path.of(input);
-		return Files.readString(filePath);
-	}
+	
+//	private static String getFileString(String input) throws IOException {
+//		Path filePath = Path.of(input);
+//		return Files.readString(filePath);
+//	}
 	
 	//returns the SHA1'd version of the String given in the constructor.
 	public String getSha() {
@@ -68,20 +73,36 @@ public class Blob {
 	//and copies the original contents into the new file.
 	public void makeNewFile() throws IOException {
 		String newName = translatedName;
-		String temp = "";
-		String contents = "";
-		BufferedReader mike = new BufferedReader(new FileReader(givenName));
 		
+		File newFile = new File(".\\objects\\"+newName);
+		newFile.createNewFile();
+		FileWriter ike = new FileWriter(newFile);
+		ike.write(contents);
+		ike.close();
+//		Path p = Paths.get("\\objects\\"+newName+".txt");
+//        try {
+//            Files.writeString(p, contents, StandardCharsets.ISO_8859_1);
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+        
+//		File newFile = new File();
+//		//newFile.createNewFile();
+//		FileWriter ike = new FileWriter(newFile);
+//		ike.write(contents);
+//		ike.close();
+	}
+	
+	public String getContents(String input) throws IOException {
+		BufferedReader mike = new BufferedReader(new FileReader(input));
+		String temp = "";
 		while(mike.ready()) {
 			temp+=""+(char)mike.read();
 		}
 		mike.close();
-		newName+=fileNameCreator(temp);
-		File newFile = new File("C:\\Users\\overe\\eclipse-workspace\\GitBlob\\test\\objects\\"+newName+".txt");
-		//newFile.createNewFile();
-		FileWriter ike = new FileWriter(newFile);
-		ike.write(temp);
-		ike.close();
+		contents = temp;
+		return contents;
 	}
 	
 }

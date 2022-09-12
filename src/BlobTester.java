@@ -16,9 +16,12 @@ public class BlobTester {
 //		String sha = blobithy.getSha();
 //		System.out.print("\n" + input + ": " + sha);
 		
-		Blob blobiford = new Blob(".\\test\\among.txt");
-		
-		
+//		Blob blobiford = new Blob("among.txt");
+		Index jones = new Index();
+		jones.add("naruto");
+		jones.add("luffy");
+		jones.add("goku");
+		jones.remove("naruto");
 		
 //        String s1 = "GeeksForGeeks";
 //        System.out.println("\n" + s1 + " : " + BlobCreationTechnique(s1));
