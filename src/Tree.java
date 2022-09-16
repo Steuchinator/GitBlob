@@ -5,6 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -22,9 +26,12 @@ public class Tree {
 		    listString += input.get(i) + "\n";
 		}
 		listString += input.get(i);
+		File folder = new File("objects");
+		folder.mkdir();
+		SHA1str = "";
 		makeSHA1(listString);
+		System.out.println(SHA1str);
 		createFile();
-		
 		
 	}
 	
@@ -40,14 +47,13 @@ public class Tree {
 	
 	public void createFile() throws FileNotFoundException
 	{
-		File f = new File("objects/SHA1str");
-		PrintWriter out = new PrintWriter(f);
-		out.print(listString);
-		out.close();
-		
+		Path p = Paths.get("objects/" + SHA1str);
+        try {
+            Files.writeString(p, listString, StandardCharsets.ISO_8859_1);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
 	}
-	
-	
-	
-	
+	}
 }
+
