@@ -26,8 +26,8 @@ public class Tree {
 		    listString += input.get(i) + "\n";
 		}
 		listString += input.get(i);
-		File folder = new File("objects");
-		folder.mkdir();
+//		File folder = new File("objects");
+//		folder.mkdir();
 		SHA1str = "";
 		makeSHA1(listString);
 		System.out.println(SHA1str);
