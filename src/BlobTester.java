@@ -18,10 +18,10 @@ public class BlobTester {
 		
 //		Blob blobiford = new Blob("among.txt");
 		Index jones = new Index();
-		jones.add("naruto");
-		jones.add("luffy");
-		jones.add("goku");
-		jones.remove("naruto");
+		jones.add("testFile1");
+		jones.add("testFile2");
+//		jones.add("goku");
+//		jones.remove("testFIle");
 		
 //        String s1 = "GeeksForGeeks";
 //        System.out.println("\n" + s1 + " : " + BlobCreationTechnique(s1));
