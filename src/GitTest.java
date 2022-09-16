@@ -74,7 +74,8 @@ class GitTest {
 //		Call init
 		
 //		Verify index and objects folder are created
-		assertTrue(new File("objects/").exists());
+        Path path = Paths.get("objects");
+        assertTrue(Files.exists(path));
 		
 //		Call add a few times
 		
@@ -94,11 +95,11 @@ class GitTest {
 		String indexTest = getFileString("index.txt");
 		
 		String indexCorrect = "";
-		indexCorrect += ("testFile1: c3499c2729730a7f807efb8676a92dcb6f8a3f8f");
+		indexCorrect += ("testFile1 : c3499c2729730a7f807efb8676a92dcb6f8a3f8f");
 		indexCorrect += ("\ntestFile2 : 4bcc88817a8cbd2f6475a0388641a12fa6f867b3");
-		indexCorrect += ("\ntestFile3 :47256718d66bfd6fab611ca13515f0833cc4f934 ");
+		indexCorrect += ("\ntestFile3 : 47256718d66bfd6fab611ca13515f0833cc4f934");
 		
-		assertTrue(indexTest.equals(indexCorrect));
+		assertEquals(indexTest,indexCorrect);
 		
 		
 //		Call remove
@@ -107,15 +108,15 @@ class GitTest {
 		
 //		Verify index is updated and objects are removed
 		File test1 = new File ("objects/","4bcc88817a8cbd2f6475a0388641a12fa6f867b3");
-		assertTrue(test1.exists());
+		assertFalse(test1.exists());
 		
 		
 		File test2 = new File ("objects/","47256718d66bfd6fab611ca13515f0833cc4f934");
-		assertTrue(test2.exists());
+		assertFalse(test2.exists());
 		
 		
 		String indexCorrect2 = "";
-		indexCorrect2 += ("\ntestFile3 :47256718d66bfd6fab611ca13515f0833cc4f934 ");
+		indexCorrect2 += ("testFile3 : 47256718d66bfd6fab611ca13515f0833cc4f934");
 		
 		String indexTest2 = getFileString("index.txt");
 		
