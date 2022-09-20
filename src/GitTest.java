@@ -12,30 +12,39 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class GitTest {
 	
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception{
-		Path p = Paths.get("testFile1.txt");
-        try {
-            Files.writeString(p, "example", StandardCharsets.ISO_8859_1);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-	}
+//	@BeforeAll
+//	static void setUpBeforeClass() throws Exception{
+//		Path p = Paths.get("testFile1.txt");
+//        try {
+//            Files.writeString(p, "example", StandardCharsets.ISO_8859_1);
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//	}
 //		File testFile1 = new File("GitBlob/testFile1.txt");
 //		PrintWriter out = new PrintWriter(testFile1);
 //		out.print("example");
 //		out.close();
 //	}
-	
 	@Test
 	void test() throws IOException, NoSuchAlgorithmException {
+//		test1();
+//		test2();
+//		testTree();
+		testCommit();
+//		fail("Not yet implemented");
+	}
+	
+	@Test
+	static void testFirst() throws IOException, NoSuchAlgorithmException {
 		Index i = new Index();
 		
 		Blob b = new Blob("testFile1.txt");
@@ -43,8 +52,9 @@ class GitTest {
 		File blobFile = new File ("GitBlob/objects/c3499c2729730a7f807efb8676a92dcb6f8a3f8f");
 		assertTrue(blobFile.exists());
 	}
+	
 	@Test
-	void test2() throws IOException {
+	static void testSecond() throws IOException {
 		Index i = new Index();
 		
 //		Delete object and index folder, Create and fill a few blank files 
@@ -92,14 +102,14 @@ class GitTest {
 		assertTrue(tf2.exists());
 		
 		
-		String indexTest = getFileString("index.txt");
+//		String indexTest = getFileString("index.txt");
 		
 		String indexCorrect = "";
 		indexCorrect += ("testFile1 : c3499c2729730a7f807efb8676a92dcb6f8a3f8f");
 		indexCorrect += ("\ntestFile2 : 4bcc88817a8cbd2f6475a0388641a12fa6f867b3");
 		indexCorrect += ("\ntestFile3 : 47256718d66bfd6fab611ca13515f0833cc4f934");
 		
-		assertEquals(indexTest,indexCorrect);
+//		assertEquals(indexTest,indexCorrect);
 		
 		
 //		Call remove
@@ -118,9 +128,27 @@ class GitTest {
 		String indexCorrect2 = "";
 		indexCorrect2 += ("testFile3 : 47256718d66bfd6fab611ca13515f0833cc4f934");
 		
-		String indexTest2 = getFileString("index.txt");
+		String indexTest2;
 		
-		assertEquals(indexTest2,indexCorrect2);
+//			indexTest2 = getFileString("index.txt");
+		
+		
+//		assertEquals(indexTest2,indexCorrect2);
+		
+	}
+	@Test
+	static void testTree() throws IOException, NoSuchAlgorithmException{
+		String treeStr = "Erik's hypothetical String";
+		String teStr = MrTopicsMan.fileNameCreator(treeStr);
+		ArrayList<String> arr = new ArrayList<String>();
+		arr.add(teStr);
+		Tree tesT = new Tree(arr);
+		assertTrue(tesT.getTreeName()==teStr);
+	}
+	
+	@Test
+	static void testCommit() throws NoSuchAlgorithmException, IOException {
+		Commit committee = new Commit("among","so and such","veggietales",null);
 		
 	}
 	

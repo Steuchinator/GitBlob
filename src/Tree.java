@@ -18,21 +18,25 @@ public class Tree {
 	private String SHA1str;
 	private byte[] SHA1;
 	
+	
 	public Tree(ArrayList<String> input) throws NoSuchAlgorithmException, FileNotFoundException
 	{
 		int i;
 		listString="";
-		for(i = 0;i < input.size() - 1;i++) {
+		for(i = 0;i < input.size() ;i++) {
 		    listString += input.get(i) + "\n";
 		}
-		listString += input.get(i);
 //		File folder = new File("objects");
 //		folder.mkdir();
 		SHA1str = "";
 		makeSHA1(listString);
-		System.out.println(SHA1str);
+//		System.out.println(SHA1str);
 		createFile();
 		
+	}
+	
+	public String getTreeName() {
+		return SHA1str;
 	}
 	
 	public void makeSHA1(String x) throws NoSuchAlgorithmException
@@ -47,7 +51,7 @@ public class Tree {
 	
 	public void createFile() throws FileNotFoundException
 	{
-		Path p = Paths.get("objects/" + SHA1str);
+		Path p = Paths.get(".\\objects\\" + SHA1str);
         try {
             Files.writeString(p, listString, StandardCharsets.ISO_8859_1);
         } catch (IOException e) {
