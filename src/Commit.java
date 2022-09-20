@@ -71,7 +71,7 @@ public class Commit {
 		String pa = "";
 		String ch = "";
 		if(pTree!=null)
-			pT = pTree.getTreeName();
+			pT = ".\\objects\\"+pTree.getTreeName();
 		if(parent!=null)
 			pa = parent.getContents();
 		if(child!=null)

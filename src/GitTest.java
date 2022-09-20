@@ -149,7 +149,7 @@ class GitTest {
 	@Test
 	static void testCommit() throws NoSuchAlgorithmException, IOException {
 		Commit committee = new Commit("among","so and such","veggietales",null);
-		
+		Commit committe = new Commit("smamoog","such and so","i love fruit",committee);
 	}
 	
 	public String getFileString(String fileName) throws IOException
